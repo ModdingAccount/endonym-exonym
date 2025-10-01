@@ -1,0 +1,23 @@
+spriteTypes = {
+
+	spriteType = {
+		name = "GFX_armyoverview_buttons_bg"
+		texturefile = "gfx/interface/topbar/armyoverview_buttons_bg.dds"
+	}
+
+	spriteType = {
+		name = "GFX_endo_exo_exonym_button"
+		texturefile = "gfx/interface/endo_exo/endo_exo_exonym_button.dds"
+		noOfFrames = 2
+	}
+	spriteType = {
+		name = "GFX_endo_exo_endonym_button"
+		texturefile = "gfx/interface/endo_exo/endo_exo_endonym_button.dds"
+		noOfFrames = 2
+	}
+	spriteType = {
+		name = "GFX_endo_exo_default_button"
+		texturefile = "gfx/interface/endo_exo/endo_exo_default_button.dds"
+		noOfFrames = 2
+	}
+}

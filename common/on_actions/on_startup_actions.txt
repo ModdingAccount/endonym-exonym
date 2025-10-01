@@ -1,0 +1,16 @@
+
+on_actions = {
+	on_startup = {
+		effect = {
+			ZZZ = { #Dummy tag used in TNO to run various calculations, in this case it's used to run the Endo-Exo effects
+
+				endo_exo_names_init = yes
+				active_endonyms = yes
+				universal_renamings = yes
+				
+				# Renamings that occur after a certain date
+				country_event = { id = endo_exo.2194 days = 2557 }
+			}
+		}
+	}
+}

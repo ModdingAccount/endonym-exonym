@@ -1,0 +1,66 @@
+# Here are some examples of the state renaming effects
+## While the state renaming effects are usually divided per region, they are still organized per tag in alphabetical order
+
+#GNG
+state_control_effect_1439 = {
+	if = {
+		limit = {
+			OR = {
+				is_controlled_by = GNG
+				is_controlled_by = JAP
+
+			}
+		}
+		set_province_name = { id = 1120 name = VICTORY_POINTS_1120_gng_jap }
+		set_province_name = { id = 1162 name = VICTORY_POINTS_1162_gng_jap }
+		set_province_name = { id = 1202 name = VICTORY_POINTS_1202_gng_jap }
+		set_province_name = { id = 19526 name = VICTORY_POINTS_19526_gng_jap }
+		set_state_name = STATE_1439_gng_jap
+	}
+	else = {
+		reset_state_name = yes
+		reset_province_name = 1120
+		reset_province_name = 1162
+		reset_province_name = 1202
+		reset_province_name = 19526
+	}
+}
+
+#KRK
+state_control_effect_2194 = {
+	if = {
+		limit = {
+			OR = {
+				is_controlled_by = KRK
+				is_controlled_by = UZB
+			}
+		}
+		if = {
+			limit = { date < 1969.1.1 }
+			set_state_name = STATE_2194_krk_1962
+			if = {
+				limit = { has_global_flag = TNO_endonym_mode }
+				set_province_name = { id = 12454 name = VICTORY_POINTS_12454_krk_1962 }
+			}
+		}
+		else = {
+			set_state_name = STATE_2194_krk_1969
+			set_province_name = { id = 12454 name = VICTORY_POINTS_12454_1969 }
+			if = {
+				limit = { has_global_flag = TNO_endonym_mode }
+				set_province_name = { id = 12454 name = VICTORY_POINTS_12454_krk_1969 }
+			}
+		}
+	}
+	else = {
+		if = {
+			limit = { date < 1969.1.1 }
+			reset_state_name = yes
+			reset_province_name = 12454
+		}
+		else = {
+			set_state_name = STATE_2194_1969
+			set_province_name = { id = 12454 name = VICTORY_POINTS_12454_1969 }
+		}
+	}
+}

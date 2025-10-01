@@ -1,0 +1,21 @@
+add_namespace = endo_exo
+
+#event no. is based off the specific state affected
+
+country_event = {
+	id = endo_exo.2194
+	immediate = { log = "[GetDateText]: [Root.GetName]: event endo_exo.2194" }
+	title = endo_exo.2194
+	desc = endo_exo.2194
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	hidden = yes
+
+	option = {
+		name = endo_exo.2194.a
+		2194 = {
+			force_update_renamings_single_state = yes 
+		}
+	}
+}

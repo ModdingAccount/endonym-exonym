@@ -1,0 +1,137 @@
+###This method is somehow more straightforward and less performance intensive than how Kaiserreich does it because it doesn't run an effect on every vp, only the ones that need it. Sure it requires a big file like this but the alternative is manually adding every vp in the world to an array with lowered flexibiity in how the system is used and code readability
+active_exonyms = { #to pure english
+	every_state = { #non-static exo states go here
+		reset_state_name = yes
+	}
+	for_loop_effect = { #Follow this from the first vp province id until the last province id
+		start = 1 
+		end = 1001 
+		value = prv_idx
+
+		meta_effect = {
+			text = {
+				reset_province_name = [endo_prov_id]
+			}
+			endo_prov_id = "[?prv_idx]"
+		}
+	}
+	for_loop_effect = { #repeat every 1000th vp
+		start = 1001
+		end = 2001
+		value = prv_idx
+
+		meta_effect = {
+			text = {
+				reset_province_name = [endo_prov_id]
+			}
+			endo_prov_id = "[?prv_idx]"
+		}
+	}
+}
+universal_renamings = { #any non endo-exo renamings that can occur ex. Saigon -> Ho Chi Minh City and renamings that apply even in the exo mode, sorted only by tag, not region here
+	every_state = {
+		limit = { has_state_flag = universal_renamings }
+		meta_effect = {
+			text = {
+				state_control_effect_[STATEID] = yes
+			}
+			STATEID = "[?This.GetID]"
+		}
+	}
+}
+
+active_endonyms = {
+	#tags are listed alphabetically after being first sorted by region for easy reference. states are sorted under their controller at gamestart
+
+	#EXAMPLE REGION 1
+
+	#GER
+	52 = { #don't need blocks for tag checking if the state isn't going to be controlled by anyone non-german
+		set_state_name = STATE_52_ger
+		if = {
+			limit = { has_global_flag = endonym_mode }
+			set_province_name = { id = 692 name = VICTORY_POINTS_692_ger }
+		}
+	}
+	#renamings that are specific to the endonym mode - as in, default uses the usual english exonyms
+	#everything above this are renames that happen in default mode as well (but not the exonym mode)
+	#states are listed numerically for easy reference
+	if = {
+		limit = { has_global_flag = endonym_mode }
+		55 = { set_province_name = { id = 6488 name = VICTORY_POINTS_6488_ger_long } } #this can be used for longer official names of cities (this example uses Frankfurt in the default mode and Frankfurt am Main in the exonym mode)
+	}
+
+	#EXAMPLE REGION 2
+
+	#GNG
+	1439 = {
+		if = {
+			limit = {
+				OR = {
+					is_controlled_by = GNG
+					is_controlled_by = JAP
+
+				}
+			}
+			set_province_name = { id = 1120 name = VICTORY_POINTS_1120_gng_jap }
+			set_province_name = { id = 1162 name = VICTORY_POINTS_1162_gng_jap }
+			set_province_name = { id = 1202 name = VICTORY_POINTS_1202_gng_jap }
+			set_province_name = { id = 19526 name = VICTORY_POINTS_19526_gng_jap }
+			set_state_name = STATE_1439_gng_jap
+		}
+		else = {
+			reset_state_name = yes
+			reset_province_name = 1120
+			reset_province_name = 1162
+			reset_province_name = 1202
+			reset_province_name = 19526
+		}
+	}
+
+# Runs the state control effect on all valid states owned by a tag
+force_update_renamings = {
+	hidden_effect = {
+		every_owned_state = {
+			limit = {
+				OR = {
+					has_state_flag = universal_renamings 
+					has_state_flag = state_renamings 
+				}
+			}
+			meta_effect = {
+				text = {
+					state_control_effect_[STATEID] = yes
+				}
+				STATEID = "[?This.GetID]"
+			}
+		}
+	}
+}
+
+force_update_renamings_single_state = {
+	hidden_effect = {
+		meta_effect = {
+			text = {
+				state_control_effect_[STATEID] = yes
+			}
+			STATEID = "[?This.GetID]"
+		}
+	}
+}
+
+endo_exo_names_init = {
+	#Based on gamestart
+
+	#German Endo/Exo
+	add_to_array = { global.german_names = GER }
+}
+
+endo_exo_add_german_names = {
+	add_to_array = { global.german_names = THIS }
+	force_update_renamings = yes
+}
+
+endo_exo_remove_german_names = {
+	remove_from_array = { global.german_names = THIS }
+	force_update_renamings = yes
+}

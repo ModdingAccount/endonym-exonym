@@ -1,0 +1,42 @@
+scripted_gui = {
+	topbar_endo_exo = {
+		context_type = player_context
+		window_name = "topbar_endo_exo"
+		parent_window_token = top_bar
+
+		triggers = {
+			default_button_visible = { #appears while in default, click to switch to endonym
+				NOT = {
+					has_global_flag = endonym_mode #native languages
+					has_global_flag = exonym_mode #full english 
+				}
+			}
+			endonym_button_visible = { #appears while in endonym, click to switch to exonym
+				has_global_flag = endonym_mode #native languages
+			}
+			exonym_button_visible = { #appears while in exonym, click to switch to default
+				has_global_flag = exonym_mode #full english
+			}
+		}
+		effects = {
+			default_button_click = {
+				set_global_flag = endonym_mode
+				clr_global_flag = exonym_mode
+				universal_renamings = yes
+				active_endonyms = yes
+			}
+			endonym_button_click = {
+				set_global_flag = exonym_mode
+				clr_global_flag = endonym_mode
+				active_exonyms = yes
+				universal_renamings = yes
+			}
+			exonym_button_click = {
+				clr_global_flag = exonym_mode
+				clr_global_flag = endonym_mode
+				universal_renamings = yes
+				active_endonyms = yes
+			}
+		}
+	}
+}
