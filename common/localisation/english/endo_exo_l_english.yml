@@ -1,3 +1,4 @@
-﻿ exonym_button: "§YEndonym/Exonym Toggle§!\nCurrent Setting: §DExonyms/English names§!"
+﻿l_english:
+ exonym_button: "§YEndonym/Exonym Toggle§!\nCurrent Setting: §DExonyms/English names§!"
  endonym_button: "§YEndonym/Exonym Toggle§!\nCurrent Setting: §DEndonyms/Native names§!"
  default_button: "§YEndonym/Exonym Toggle§!\nCurrent Setting: §DDefault§!"
